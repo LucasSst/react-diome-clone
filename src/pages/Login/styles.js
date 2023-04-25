@@ -16,6 +16,8 @@ export const Wrapper = styled.div `
     max-width:300px;
 `
 
+
+
 export const Column = styled.div `
     flex:1;
 `
@@ -78,7 +80,9 @@ export const CriarText = styled.p `
     line-height: 19px;
 
     color:#E23DD7;
-
+    a{
+        text-decoration:none;
+    }
 `
 
 

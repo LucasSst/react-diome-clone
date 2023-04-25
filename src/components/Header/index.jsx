@@ -1,11 +1,10 @@
 import React from 'react'
 import logo from '../../assets/dio-logo.png'
-
+import { useNavigate } from 'react-router-dom'
 import { Button } from '../Button'
 
 import{
     BuscarInputContainer,
-    Column,
     Container,
     Input,
     Menu,
@@ -15,7 +14,22 @@ import{
     Wrapper
 } from './styles'
 
+
 const Header = ({autenticado}) => {
+    const navigate = useNavigate();
+
+    const handleLinkLogin = () =>{
+        navigate('/login')
+    }
+
+    const handleLinkCadastre = () =>{
+        navigate('/cadastre')
+    }
+
+    const handleLinkHome = () => {
+        navigate('/')
+    }
+     
   return (
     <Wrapper>
         <Container>
@@ -36,9 +50,9 @@ const Header = ({autenticado}) => {
                     <UserPicture src='https://i.pinimg.com/736x/e9/ab/cd/e9abcd2f68657d064b88c885a3e36d0c.jpg'/>
                 ) : (
                     <>
-                        <MenuRight href='#'>Home</MenuRight>
-                        <Button  title="Entrar"/>
-                        <Button  title="Cadastrar"/>
+                        <MenuRight onClick={handleLinkHome} href='#'>Home</MenuRight>
+                        <Button onClick={handleLinkLogin}  title="Entrar"/>
+                        <Button onClick={handleLinkCadastre} title="Cadastrar"/>
                     </>
                 )}
                 
