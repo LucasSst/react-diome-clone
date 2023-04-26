@@ -1,6 +1,6 @@
-import React from 'react'
+
 import logo from '../../assets/dio-logo.png'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button } from '../Button'
 
 import{
@@ -11,12 +11,15 @@ import{
     MenuRight,
     Row,
     UserPicture,
-    Wrapper
+    Wrapper,
+    ExitLink
 } from './styles'
+import { useAuth } from '../../hooks/useAuth'
 
 
-const Header = ({autenticado}) => {
+const Header = () => {
     const navigate = useNavigate();
+
 
     const handleLinkLogin = () =>{
         navigate('/login')
@@ -29,13 +32,17 @@ const Header = ({autenticado}) => {
     const handleLinkHome = () => {
         navigate('/')
     }
-     
+    const {user, handleSingOut} = useAuth()
+
   return (
     <Wrapper>
         <Container>
             <Row>
-                <img width={80}  src={logo} alt='logo da dio'/>
-                {autenticado ? (<>
+                <Link to='/'>
+                    <img width={80}  src={logo} alt='logo da dio'/>
+                </Link>
+                
+                {user.id ? (<>
                     <BuscarInputContainer>
                         <Input placeholder='Buscar...'/>
                     </BuscarInputContainer>
@@ -46,12 +53,15 @@ const Header = ({autenticado}) => {
             </Row>
 
             <Row>
-                {autenticado ? (
-                    <UserPicture src='https://i.pinimg.com/736x/e9/ab/cd/e9abcd2f68657d064b88c885a3e36d0c.jpg'/>
+                {user.id ? (
+                    <>
+                        <UserPicture src='https://i.pinimg.com/736x/e9/ab/cd/e9abcd2f68657d064b88c885a3e36d0c.jpg'/> {""}
+                        <ExitLink href="#" onClick={handleSingOut}> Exit</ExitLink>
+                    </>
                 ) : (
                     <>
                         <MenuRight onClick={handleLinkHome} href='#'>Home</MenuRight>
-                        <Button onClick={handleLinkLogin}  title="Entrar"/>
+                        <Button  onClick={handleLinkLogin}  title="Entrar"/>
                         <Button onClick={handleLinkCadastre} title="Cadastrar"/>
                     </>
                 )}

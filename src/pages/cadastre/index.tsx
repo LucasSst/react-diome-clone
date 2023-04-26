@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
-import React from 'react'
 import { Header } from '../../components/Header';
 import {Container, Title, Section, SpacingButton, ParagraphSecondary, ParagraphPrimary } from './styles';
 import { Button } from '../../components/Button';
@@ -20,11 +19,11 @@ const Cadastre = () => {
     resolver: yupResolver(schema),
     mode:"onChange"
   });
-  const onSubmit = data => console.log(data);
+  const onSubmit = (data: any) => console.log(data);
   return (
     
     <>
-        <Header />
+        <Header/>
         <Container>
             
                 <Title>

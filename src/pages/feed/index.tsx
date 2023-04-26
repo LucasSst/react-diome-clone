@@ -8,13 +8,12 @@ import { UserInfo } from "../../components/UserInfo";
 
 import {Container, Column, Title, TittleHighlight} from './styles'
 
-import React from 'react'
 
 const Feed = () => {
- 
+
   return (
     <div>
-        <Header autenticado={true} />
+        <Header/>
         <Container>
           <Column flex={3}>
             <Title>Feed</Title>

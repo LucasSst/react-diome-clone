@@ -81,3 +81,14 @@ export const Input = styled.input `
     border:0;
     color:#FFF;
 `
+export const ExitLink = styled.a `
+    color: white;
+    margin-left:10px;
+    font-size: 12px;
+    font-family: 'Open Sans';
+    text-decoration: none;
+
+    &: hover{
+        text-decoration: underline;
+    }
+`

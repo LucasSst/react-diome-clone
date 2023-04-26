@@ -10,10 +10,12 @@ import { useForm } from "react-hook-form";
 
 import {Column,Container,CriarText,EsqueciText,Row,SubtitleLogin,Title,TitleLogin,Wrapper} from './styles'
 
-import {api} from "../../services/api"
 
-import React from 'react'
-import { Link, useNavigate } from "react-router-dom";
+
+import { Link} from "react-router-dom";
+import { IFormData } from "./types";
+import { useAuth } from "../../hooks/useAuth";
+
 
 const schema = yup.object({
   email: yup.string().email('Digite um email válido!').required('Campo obrigatório.'),
@@ -21,30 +23,21 @@ const schema = yup.object({
 }).required();  
 
 const Login = () => {
-    const navigate = useNavigate();
+    const {handleLogin} = useAuth()
 
-    const { control, handleSubmit,  formState: { errors} } = useForm({
+    const { control, handleSubmit,  formState: { errors} } = useForm<IFormData>({
       resolver: yupResolver(schema),
       mode: 'onChange',
     });
 
 
-    const onSubmit = async formData => {
-      try{
-        const {data } = await api.get(`users?email=${formData.email}&password=${formData.password}`)
-        if(data.length === 1){
-          navigate('/feed')
-        }else {
-          alert('Email ou senha inválido!')
-        }
-      }catch{
-        alert('Houve um erro, espere um pouco e depois tente novamente.')
-      }
+    const onSubmit = async (formData:IFormData) => {
+      await handleLogin(formData)
     };
   
   return (
     <>
-        <Header />
+        <Header/>
 
         <Container>
 
